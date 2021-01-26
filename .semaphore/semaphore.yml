@@ -1,13 +1,26 @@
 version: v1.0
-name: Initial Pipeline
+name: Linux Tests
+
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
+
 blocks:
-  - name: 'Block #1'
+  - name: '/kernel tests'
+    run:
+      when: "change_in('/kernel')"
     task:
       jobs:
-        - name: 'Job #1'
+        - name: 'Test'
+          commands:
+            - checkout
+
+  - name: '/arch tests'
+    run:
+      when: "change_in('/arch')"
+    task:
+      jobs:
+        - name: 'Test'
           commands:
             - checkout
