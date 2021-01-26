@@ -8,8 +8,9 @@ agent:
 
 blocks:
   - name: '/kernel tests'
+    dependencies: []
     run:
-      when: "change_in('/kernel')"
+      when: "change_in('/kernel', {pipeline_file: 'ignore'})"
     task:
       jobs:
         - name: 'Test'
@@ -17,8 +18,9 @@ blocks:
             - checkout
 
   - name: '/arch tests'
+    dependencies: []
     run:
-      when: "change_in('/arch')"
+      when: "change_in('/arch', {pipeline_file: 'ignore'})"
     task:
       jobs:
         - name: 'Test'
